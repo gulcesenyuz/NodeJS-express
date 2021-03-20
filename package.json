@@ -1,0 +1,23 @@
+{
+  "name": "node-express",
+  "version": "1.0.0",
+  "description": "Node Express Examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Gülce",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gulcesenyuz/NodeJS-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gulcesenyuz/NodeJS-express/issues"
+  },
+  "homepage": "https://github.com/gulcesenyuz/NodeJS-express#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
