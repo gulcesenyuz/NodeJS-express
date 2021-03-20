@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gulcesenyuz/NodeJS-express#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "morgan": "^1.10.0"
   }
 }
