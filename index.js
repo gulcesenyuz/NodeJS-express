@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const dishRouter = require('./routes/dishRouter');
 
 const hostname = 'localhost';
 const port = 3000;
@@ -13,61 +14,39 @@ app.use(morgan('dev'));
 //kullanılabilmesi için bu tanımlamanın yapılması gerekmektedir. ->bodyParser
 app.use(bodyParser.json());
 
-//would be done for all the requests, get, put, post, and delete, on the dishes
-app.all('/dishes', ((req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
-}));
 
-app.get('/dishes', (req, res, next) => {
-    res.end('will send all the dishes to you!');
+//in my express application,
+//any request coming to that slash dishes endpoint will be handled by dishRouter
+app.use('/dishes', dishRouter),
 
-});
-
-app.post('/dishes', (req, res, next) => {
-    res.end('will add the dish: ' + req.body.name + ' with details: ' + req.body.description);
-
-});
-
-app.put('/dishes', (req, res, next) => {
-    res.statusCode = 403;
-    res.end('PUT operation not supported on /dishes ');
-});
-
-app.delete('/dishes', (req, res, next) => {
-    res.end('Deleting all the dishes!');
-
-});
-//** */
-
-app.get('/dishes/:dishId', (req, res, next) => {
-    res.end(`will send  details of ${req.params.dishId} to you!`);
-
-});
-
-app.post('/dishes/:dishId', (req, res, next) => {
-    res.statusCode = 403;
-    res.end(`POST operation not supported on /dishes/${req.params.dishId}`);
-
-});
-
-app.put('/dishes/:dishId', (req, res, next) => {
-    res.write(`Updating the dish ${req.params.dishId} \n`);
-    res.end(`will update the dish ${req.body.name} with details ${req.body.description}`);
-
-});
-
-app.delete('/dishes/:dishId', (req, res, next) => {
-    res.end(`deleting dish : ${req.params.dishId}`);
-
-});
+    /*
+    app.get('/dishes/:dishId', (req, res, next) => {
+        res.end(`will send  details of ${req.params.dishId} to you!`);
+    
+    });
+    
+    app.post('/dishes/:dishId', (req, res, next) => {
+        res.statusCode = 403;
+        res.end(`POST operation not supported on /dishes/${req.params.dishId}`);
+    
+    });
+    
+    app.put('/dishes/:dishId', (req, res, next) => {
+        res.write(`Updating the dish ${req.params.dishId} \n`);
+        res.end(`will update the dish ${req.body.name} with details ${req.body.description}`);
+    
+    });
+    
+    app.delete('/dishes/:dishId', (req, res, next) => {
+        res.end(`deleting dish : ${req.params.dishId}`);
+    
+    });
+    */
 
 
-
-// serve up the static files from double underscore dirname
-//check root folder inside public
-app.use(express.static(__dirname + '/public'))
+    // serve up the static files from double underscore dirname
+    //check root folder inside public
+    app.use(express.static(__dirname + '/public'))
 
 //call to  set up our server
 app.use((req, res, next) => {
